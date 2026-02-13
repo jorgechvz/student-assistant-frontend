@@ -3,8 +3,9 @@
   to = "https://loop-api-41qx.onrender.com/:splat"
   status = 200
   force = true
+  headers = {X-From = "Netlify"}
 
-# SPA fallback - all routes serve index.html for React Router
+# SPA fallback - DEBE ir después del proxy
 [[redirects]]
   from = "/*"
   to = "/index.html"
