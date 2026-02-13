@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/context/auth/userStore";
-import React, { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 interface PublicRouteProps {
   redirectTo?: string;
@@ -9,31 +9,17 @@ interface PublicRouteProps {
 
 const PublicRoute: React.FC<PublicRouteProps> = ({
   children,
-  redirectTo = "/connection",
+  redirectTo = "/",
 }) => {
-  const { isAuthenticated, isLoading, checkSession } = useAuthStore();
-  const [hasChecked, setHasChecked] = useState(false);
-
-  useEffect(() => {
-    const verifySession = async () => {
-      if (!hasChecked) {
-        await checkSession();
-        setHasChecked(true);
-      }
-    };
-    verifySession();
-  }, [checkSession, hasChecked]);
-
-  if (isLoading || !hasChecked) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div>Loading...</div>
-      </div>
-    );
-  }
+  const { isAuthenticated } = useAuthStore();
+  const location = useLocation();
 
   if (isAuthenticated) {
-    return <Navigate to={redirectTo} replace />;
+    // If the user was trying to reach a protected page before being sent to login,
+    // redirect them there instead of the default.
+    const intendedPath = (location.state as any)?.from?.pathname;
+    const target = intendedPath || redirectTo;
+    return <Navigate to={target} replace />;
   }
 
   return children ?? <Outlet />;
