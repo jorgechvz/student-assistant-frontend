@@ -16,12 +16,17 @@ import {
 import { Input } from "@/components/ui/input";
 import useAuth from "@/hooks/use-auth";
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { handleSignUp } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = (location.state as any)?.from?.pathname || "/connection";
+
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,8 +37,8 @@ export function SignupForm({
     await handleSignUp.mutateAsync(
       { email, password, full_name },
       {
-        onSuccess: (data: any) => {
-          setServerMessage(data?.user || "Account created successfully!");
+        onSuccess: () => {
+          navigate(from, { replace: true });
         },
         onError: (error: any) => {
           setServerMessage(
@@ -103,7 +108,10 @@ export function SignupForm({
                   </FieldDescription>
                 )}
                 <FieldDescription className="text-center">
-                  Already have an account? <a href="/auth/login">Sign in</a>
+                  Already have an account?{" "}
+                  <Link to="/auth/login" state={location.state}>
+                    Sign in
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

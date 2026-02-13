@@ -9,7 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import useAuth from "@/hooks/use-auth";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export function LoginForm({
   className,
@@ -19,7 +19,7 @@ export function LoginForm({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = (location.state as any)?.from?.pathname || "/";
+  const from = (location.state as any)?.from?.pathname || "/connection";
 
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +63,10 @@ export function LoginForm({
             </a>
             <h1 className="text-3xl font-bold">Welcome to Loop</h1>
             <FieldDescription>
-              Don&apos;t have an account? <a href="/auth/signup">Sign up</a>
+              Don&apos;t have an account?{" "}
+              <Link to="/auth/signup" state={location.state}>
+                Sign up
+              </Link>
             </FieldDescription>
           </div>
           <Field>
