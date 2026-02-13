@@ -17,6 +17,11 @@ const CHAT_ENDPOINTS = {
   DELETE_SESSION: (sessionId: string) => `/chat/sessions/${sessionId}`,
 } as const;
 
+const STREAM_BASE_URL =
+  import.meta.env.VITE_STREAM_URL ||
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:8000";
+
 export async function sendMessage(
   request: SendMessageRequest,
 ): Promise<ChatMessageResponse> {
@@ -32,12 +37,9 @@ export async function getSessions(
 ): Promise<SessionSummary[]> {
   const { limit = 20, active_only = true } = params;
 
-  const { data } = await axiosClient.get(
-    CHAT_ENDPOINTS.SESSIONS,
-    {
-      params: { limit, active_only },
-    },
-  );
+  const { data } = await axiosClient.get(CHAT_ENDPOINTS.SESSIONS, {
+    params: { limit, active_only },
+  });
 
   // Handle both array response and wrapped object response
   if (Array.isArray(data)) return data;
@@ -75,18 +77,17 @@ export async function sendMessageStream(
   onSessionId: (sessionId: string) => void,
   onComplete: (sessionId: string) => void,
 ): Promise<void> {
-  const response = await fetch(
-    `${axiosClient.defaults.baseURL}${CHAT_ENDPOINTS.MESSAGE_STREAM}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "text/event-stream",
-      },
-      credentials: "include",
-      body: JSON.stringify(request),
+  const streamUrl = `${STREAM_BASE_URL}${CHAT_ENDPOINTS.MESSAGE_STREAM}`;
+
+  const response = await fetch(streamUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "text/event-stream",
     },
-  );
+    credentials: "include",
+    body: JSON.stringify(request),
+  });
 
   if (!response.ok) {
     const errorText = await response.text();
