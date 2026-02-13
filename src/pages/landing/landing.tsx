@@ -161,6 +161,9 @@ export function LandingPage() {
               <a href="#features" className="hover:text-gray-900 transition">
                 Features
               </a>
+              <a href="#ask-it-anything" className="hover:text-gray-900 transition">
+                Ask It Anything
+              </a>
               <a
                 href="#how-it-works"
                 className="hover:text-gray-900 transition"
@@ -173,12 +176,12 @@ export function LandingPage() {
             </div>
 
             <div className="flex-1 flex justify-end items-center gap-3">
-              {showAuthButtons && (
-                isAuthenticated ? (
+              {showAuthButtons &&
+                (isAuthenticated ? (
                   <Link to={Paths.app.CHAT}>
                     <Button className="text-sm rounded-full px-5 gap-2 cursor-pointer">
-                        Go to Chat
-                        <ChevronRight className="h-4 w-4" />
+                      Go to Chat
+                      <ChevronRight className="h-4 w-4" />
                     </Button>
                   </Link>
                 ) : (
@@ -197,8 +200,7 @@ export function LandingPage() {
                       </Button>
                     </Link>
                   </>
-                )
-              )}
+                ))}
             </div>
           </div>
         </nav>
@@ -325,7 +327,9 @@ export function LandingPage() {
                   }`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <div className={`absolute inset-0 ${item.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div
+                    className={`absolute inset-0 ${item.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
                   <div className="relative">
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${item.bg} group-hover:bg-white/80 transition-colors duration-500`}
@@ -385,6 +389,7 @@ export function LandingPage() {
         </section>
 
         <section
+          id="ask-it-anything"
           ref={promptsSection.ref}
           className="py-24 md:py-32 bg-gray-50/60 border-t border-gray-100"
         >
@@ -418,7 +423,8 @@ export function LandingPage() {
                 {
                   icon: Timer,
                   prompt: "Create a study plan for my finals",
-                  answer: "Builds a schedule in Google Calendar based on exam dates.",
+                  answer:
+                    "Builds a schedule in Google Calendar based on exam dates.",
                   accent: "text-amber-600",
                   accentBg: "bg-amber-50",
                   hoverBg: "group-hover:bg-amber-50/80",
@@ -426,7 +432,8 @@ export function LandingPage() {
                 {
                   icon: BookOpenCheck,
                   prompt: "Summarize my lecture notes",
-                  answer: "Creates a Notion page with key concepts and takeaways.",
+                  answer:
+                    "Creates a Notion page with key concepts and takeaways.",
                   accent: "text-emerald-600",
                   accentBg: "bg-emerald-50",
                   hoverBg: "group-hover:bg-emerald-50/80",
@@ -434,7 +441,8 @@ export function LandingPage() {
                 {
                   icon: Lightbulb,
                   prompt: "Help me understand this concept",
-                  answer: "Guides you with Socratic questions — never gives the answer.",
+                  answer:
+                    "Guides you with Socratic questions — never gives the answer.",
                   accent: "text-purple-600",
                   accentBg: "bg-purple-50",
                   hoverBg: "group-hover:bg-purple-50/80",
@@ -450,7 +458,8 @@ export function LandingPage() {
                 {
                   icon: RefreshCcw,
                   prompt: "What should I review before the quiz?",
-                  answer: "Analyzes your grades and suggests weak areas to review.",
+                  answer:
+                    "Analyzes your grades and suggests weak areas to review.",
                   accent: "text-cyan-600",
                   accentBg: "bg-cyan-50",
                   hoverBg: "group-hover:bg-cyan-50/80",
@@ -488,6 +497,7 @@ export function LandingPage() {
         </section>
 
         <section
+          id="features"
           ref={principlesSection.ref}
           className="py-24 md:py-32 border-t border-gray-100"
         >
