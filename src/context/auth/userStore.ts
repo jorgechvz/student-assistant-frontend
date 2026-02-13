@@ -12,15 +12,17 @@ export type AuthStore = {
   user: UserStorage | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  hasChecked: boolean;
   setUser: (user: UserStorage | null) => void;
   logout: () => void;
   checkSession: () => Promise<void>;
 };
 
-export const useAuthStore = create<AuthStore>()((set) => ({
+export const useAuthStore = create<AuthStore>()((set, get) => ({
   user: null,
   isLoading: true,
   isAuthenticated: false,
+  hasChecked: false,
 
   setUser: (user: UserStorage | null) => {
     set({
@@ -40,6 +42,9 @@ export const useAuthStore = create<AuthStore>()((set) => ({
   },
 
   checkSession: async () => {
+    const { hasChecked } = get();
+
+    if (hasChecked) return;
     set({ isLoading: true });
     try {
       const response = await currentUser();
@@ -55,12 +60,14 @@ export const useAuthStore = create<AuthStore>()((set) => ({
         user: userInfo,
         isAuthenticated: true,
         isLoading: false,
+        hasChecked: true,
       });
     } catch (error) {
       set({
         user: null,
         isAuthenticated: false,
         isLoading: false,
+        hasChecked: true,
       });
     }
   },
