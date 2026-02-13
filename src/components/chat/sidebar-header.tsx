@@ -19,7 +19,7 @@ export function CustomSidebarHeader() {
           <div className="flex items-center gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
               <img
-                src={"/src/assets/logoo.svg"}
+                src={"/logoo.svg"}
                 alt={`Loop logo`}
                 className="size-6"
               />
