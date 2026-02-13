@@ -705,7 +705,7 @@ export function LandingPage() {
             <Link to="/privacy" className="hover:text-gray-600 transition">
               Privacy
             </Link>
-            <span>© {new Date().getFullYear()} Loop</span>
+            <span>© {new Date().getFullYear()} Loop Student Assistant</span>
           </div>
         </div>
       </footer>
