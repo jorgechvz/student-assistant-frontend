@@ -46,7 +46,7 @@ const useAuth = () => {
     },
   });
 
-  const handleLogout = useMutation({
+  const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: () => {
       setUser(null);
@@ -54,7 +54,7 @@ const useAuth = () => {
     },
   });
 
-  return { fetchLogin, handleSignUp, handleLogout };
+  return { fetchLogin, handleSignUp, logoutMutation };
 };
 
 export default useAuth;
