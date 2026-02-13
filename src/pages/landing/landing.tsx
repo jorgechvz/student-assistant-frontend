@@ -207,7 +207,7 @@ export function LandingPage() {
         <div className="max-w-7xl mx-auto w-full px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="max-w-xl">
             <p className="text-sm font-medium text-primary tracking-wide mb-4 animate-[fadeInUp_0.5s_ease-out_both]">
-              AI Study Assistant
+              Loop Student Assistant
             </p>
 
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1] animate-[fadeInUp_0.5s_ease-out_0.05s_both]">
