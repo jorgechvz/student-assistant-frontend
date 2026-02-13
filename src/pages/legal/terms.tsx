@@ -6,7 +6,7 @@ import LoopLogo from "@/components/logo/logo";
 export function TermsOfServicePage() {
   return (
     <>
-      <title>Terms of Service | Loop</title>
+      <title>Loop Student Assistant: Terms of Service</title>
       <meta
         name="description"
         content="Terms of Service for Loop — AI Student Learning Assistant"

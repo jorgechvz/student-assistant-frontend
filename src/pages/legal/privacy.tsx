@@ -6,7 +6,7 @@ import LoopLogo from "@/components/logo/logo";
 export function PrivacyPolicyPage() {
   return (
     <>
-      <title>Privacy Policy | Loop</title>
+      <title>Loop Student Assistant: Privacy Policy</title>
       <meta
         name="description"
         content="Privacy Policy for Loop — AI Student Learning Assistant"
