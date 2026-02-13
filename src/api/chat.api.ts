@@ -77,13 +77,16 @@ export async function sendMessageStream(
   onSessionId: (sessionId: string) => void,
   onComplete: (sessionId: string) => void,
 ): Promise<void> {
+  const { data } = await axiosClient.get("/auth/token");
+  const accessToken = data.access_token;
+  
   const streamUrl = `${STREAM_BASE_URL}${CHAT_ENDPOINTS.MESSAGE_STREAM}`;
 
   const response = await fetch(streamUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Accept: "text/event-stream",
+      "Authorization": `Bearer ${accessToken}`,
     },
     credentials: "include",
     body: JSON.stringify(request),
