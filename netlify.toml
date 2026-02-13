@@ -3,3 +3,9 @@
   to = "https://loop-api-41qx.onrender.com/:splat"
   status = 200
   force = true
+
+# SPA fallback - all routes serve index.html for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
