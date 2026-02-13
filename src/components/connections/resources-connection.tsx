@@ -15,6 +15,7 @@ const ConnectIntegrations: React.FC<ConnectIntegrationsProps> = ({
   onContinue,
 }) => {
   const allConnected =
+    status.canvasStatus === "connected" &&
     status.calendarStatus === "connected" &&
     status.notionStatus === "connected";
 
@@ -88,6 +89,13 @@ const ConnectIntegrations: React.FC<ConnectIntegrationsProps> = ({
         </div>
 
         <div className="space-y-4">
+          <ServiceCard
+            id="canvasStatus"
+            name="Canvas LMS"
+            icon={"https://img.icons8.com/fluency/48/canvas-student.png"}
+            description="Sync your courses, assignments, and grades."
+            isConnected={status.canvasStatus === "connected"}
+          />
           <ServiceCard
             id="calendarStatus"
             name="Google Calendar"
