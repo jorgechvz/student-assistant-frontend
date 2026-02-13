@@ -14,8 +14,12 @@ const CANVAS_ENDPOINTS = {
 } as const;
 
 export async function getUpcomingAssignments(): Promise<UpcomingAssignment[]> {
-  const { data } = await axiosClient.get<UpcomingAssignment[]>(
+  const { data } = await axiosClient.get(
     CANVAS_ENDPOINTS.UPCOMING_ASSIGNMENTS,
   );
-  return data;
+
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data.assignments)) return data.assignments;
+  if (data && Array.isArray(data.data)) return data.data;
+  return [];
 }
