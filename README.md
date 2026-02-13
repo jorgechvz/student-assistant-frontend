@@ -1,73 +1,95 @@
-# React + TypeScript + Vite
+# Loop — Student Learning Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Loop is an intelligent student assistant designed to centralize your academic workflow. By integrating with essential tools like Canvas LMS, Notion, and Google Calendar, Loop provides a unified, conversational interface to help you manage assignments, track grades, and schedule study sessions efficiently.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **AI Chat Interface**: Context-aware AI assistant capable of understanding your academic data. Supports Markdown and code syntax highlighting.
+- **Smart Integrations**:
+  - **Canvas LMS**: Sync courses, assignments, and grades.
+  - **Notion**: Access and manage your study notes.
+  - **Google Calendar**: Organize your schedule and deadlines.
+- **Secure Authentication**: Robust user session management with protected routes.
+- **User Settings**: Comprehensive profile management, security settings, and integration controls.
+- **Modern UI**: Built with Tailwind CSS v4 and Radix UI for a responsive and accessible experience.
+- **Reactive Data**: Optimistic UI updates and caching using TanStack Query.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand) (Global Store)
+- **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest) (React Query)
+- **Routing**: [React Router v7](https://reactrouter.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) & [Lucide React](https://lucide.dev/) (Icons)
+- **HTTP Client**: Axios
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+├── api/             # API integration layers (Axios clients, endpoints)
+├── components/      # Reusable UI components
+│   ├── auth/        # Login/Signup forms & loaders
+│   ├── chat/        # Chat interface, messages, & sidebar
+│   ├── loaders/     # Skeletons and loading screens
+│   └── ui/          # Primitives (Buttons, Dialogs, Inputs, etc.)
+├── context/         # Global state (Zustand stores)
+├── hooks/           # Custom React hooks (useAuth, useChat, etc.)
+├── lib/             # Utilities and helpers (cn, formatters)
+├── pages/           # Application views (Landing, Chat, Connections)
+├── router/          # Route definitions and guards (Protected/Public)
+└── types/           # TypeScript interfaces and shared types
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚡ Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v20.19+ or v22.12+ recommended for Vite)
+- pnpm (recommended) or npm/yarn
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourusername/student-assistant-frontend.git
+   cd student-assistant-frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
+
+3. **Environment Setup**
+   Create a `.env` file in the root directory:
+
+   ```env
+   VITE_API_URL=http://localhost:8000/api/v1
+   ```
+
+4. **Run Development Server**
+   ```bash
+   pnpm dev
+   ```
+   The app will be available at `http://localhost:5173`.
+
+## Building for Production
+
+To create a production-ready build:
+
+```bash
+pnpm build
 ```
+
+This will generate the static assets in the `dist/` folder, ready to be deployed to Vercel, Netlify, or any static host.
+
+## License
+
+This project was developed as a capstone project for academic purposes.
