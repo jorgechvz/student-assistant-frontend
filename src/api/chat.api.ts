@@ -32,13 +32,18 @@ export async function getSessions(
 ): Promise<SessionSummary[]> {
   const { limit = 20, active_only = true } = params;
 
-  const { data } = await axiosClient.get<SessionSummary[]>(
+  const { data } = await axiosClient.get(
     CHAT_ENDPOINTS.SESSIONS,
     {
       params: { limit, active_only },
     },
   );
-  return data;
+
+  // Handle both array response and wrapped object response
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data.sessions)) return data.sessions;
+  if (data && Array.isArray(data.data)) return data.data;
+  return [];
 }
 
 export async function getSessionHistory(
