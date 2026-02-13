@@ -13,19 +13,19 @@ const quickActions = [
     tag: "STUDY PLAN",
     tagColor: "text-blue-700 bg-blue-100",
     bgColor: "bg-blue-50/50 hover:bg-blue-50",
-    message: "Create a study schedule for my upcoming exams.",
+    message: "Create a study plan for my upcoming assignments.",
   },
   {
-    tag: "BRAINSTORMING",
+    tag: "COURSES",
     tagColor: "text-red-700 bg-red-100",
     bgColor: "bg-red-50/50 hover:bg-red-50",
-    message: "Generate ideas for my History research paper.",
+    message: "What are my current courses?",
   },
   {
     tag: "WRITING",
     tagColor: "text-green-700 bg-green-100",
     bgColor: "bg-green-50/50 hover:bg-green-50",
-    message: "Help me outline an essay about Cognitive Psychology.",
+    message: "Write a summary of the my upcoming assignments in Notion",
   },
 ];
 
