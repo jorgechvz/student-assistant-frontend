@@ -21,7 +21,7 @@ export const ChatMessageItem = memo(
         {message.role === "assistant" && (
           <Avatar className="h-8 w-8 mt-1 shrink-0">
             <AvatarImage
-              src="/src/assets/logoo.svg"
+              src="/logoo.svg"
               alt="AI Loop assistant logo"
               className="w-7 mx-auto"
             />
